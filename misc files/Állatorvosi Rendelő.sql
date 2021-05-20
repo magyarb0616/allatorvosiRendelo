@@ -25,16 +25,6 @@ CREATE TABLE `species` (
   `is_active` boolean
 );
 
-CREATE TABLE `doctor` (
-  `doctor_id` int PRIMARY KEY AUTO_INCREMENT,
-  `name` varchar(255),
-  `birthdate` date,
-  `phone` varchar(255),
-  `city` varchar(255),
-  `address` varchar(255),
-  `sex` boolean,
-  `is_active` boolean
-);
 
 CREATE TABLE `medicalHistory` (
   `history_id` int PRIMARY KEY AUTO_INCREMENT,
@@ -43,8 +33,8 @@ CREATE TABLE `medicalHistory` (
   `is_active` boolean
 );
 
-ALTER TABLE `species` ADD FOREIGN KEY (`species_id`) REFERENCES `animal` (`species`);
+ALTER TABLE `animal` ADD FOREIGN KEY (`species`) REFERENCES `species` (`species_id`);
 
-ALTER TABLE `owner` ADD FOREIGN KEY (`owner_id`) REFERENCES `animal` (`owner`);
+ALTER TABLE `animal` ADD FOREIGN KEY (`owner`) REFERENCES `owner` (`owner_id`);
 
-ALTER TABLE `animal` ADD FOREIGN KEY (`animal_id`) REFERENCES `medicalHistory` (`animal_id`);
+ALTER TABLE `medicalHistory` ADD FOREIGN KEY (`animal_id`) REFERENCES `animal` (`animal_id`);
