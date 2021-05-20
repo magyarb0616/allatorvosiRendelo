@@ -75,18 +75,6 @@ public class Owner implements Serializable {
     public Owner() {
     }
 
-    public Owner(String name, Date birthdate, String phone, String city, String address, Boolean sex, Boolean isActive) {
-        this.name = name;
-        this.birthdate = birthdate;
-        this.phone = phone;
-        this.city = city;
-        this.address = address;
-        this.sex = sex;
-        this.isActive = isActive;
-    }
-    
-    
-
     public Owner(Integer ownerId) {
         this.ownerId = ownerId;
     }

@@ -52,13 +52,6 @@ public class Species implements Serializable {
     public Species() {
     }
 
-    public Species(Integer speciesId, String name, Boolean isActive) {
-        this.speciesId = speciesId;
-        this.name = name;
-        this.isActive = isActive;
-    }
-    
-    
     public Species(Integer speciesId) {
         this.speciesId = speciesId;
     }

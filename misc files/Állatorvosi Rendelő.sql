@@ -14,6 +14,7 @@ CREATE TABLE `animal` (
   `name` varchar(255),
   `birthdate` date,
   `sex` boolean,
+  `last_vaccinated` date,
   `is_active` boolean,
   `species` int,
   `owner` int
@@ -25,16 +26,6 @@ CREATE TABLE `species` (
   `is_active` boolean
 );
 
-
-CREATE TABLE `medicalHistory` (
-  `history_id` int PRIMARY KEY AUTO_INCREMENT,
-  `animal_id` int,
-  `registry` varchar(255),
-  `is_active` boolean
-);
-
 ALTER TABLE `animal` ADD FOREIGN KEY (`species`) REFERENCES `species` (`species_id`);
 
 ALTER TABLE `animal` ADD FOREIGN KEY (`owner`) REFERENCES `owner` (`owner_id`);
-
-ALTER TABLE `medicalHistory` ADD FOREIGN KEY (`animal_id`) REFERENCES `animal` (`animal_id`);

@@ -6,7 +6,6 @@
 package Modell;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -18,13 +17,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -39,6 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Animal.findByName", query = "SELECT a FROM Animal a WHERE a.name = :name")
     , @NamedQuery(name = "Animal.findByBirthdate", query = "SELECT a FROM Animal a WHERE a.birthdate = :birthdate")
     , @NamedQuery(name = "Animal.findBySex", query = "SELECT a FROM Animal a WHERE a.sex = :sex")
+    , @NamedQuery(name = "Animal.findByLastVaccinated", query = "SELECT a FROM Animal a WHERE a.lastVaccinated = :lastVaccinated")
     , @NamedQuery(name = "Animal.findByIsActive", query = "SELECT a FROM Animal a WHERE a.isActive = :isActive")})
 public class Animal implements Serializable {
 
@@ -56,10 +54,11 @@ public class Animal implements Serializable {
     private Date birthdate;
     @Column(name = "sex")
     private Boolean sex;
+    @Column(name = "last_vaccinated")
+    @Temporal(TemporalType.DATE)
+    private Date lastVaccinated;
     @Column(name = "is_active")
     private Boolean isActive;
-    @OneToMany(mappedBy = "animalId")
-    private Collection<Medicalhistory> medicalhistoryCollection;
     @JoinColumn(name = "species", referencedColumnName = "species_id")
     @ManyToOne
     private Species species;
@@ -69,17 +68,6 @@ public class Animal implements Serializable {
 
     public Animal() {
     }
-
-    public Animal(String name, Date birthdate, Boolean sex, Boolean isActive, Species species, Owner owner) {
-        this.name = name;
-        this.birthdate = birthdate;
-        this.sex = sex;
-        this.isActive = isActive;
-        this.species = species;
-        this.owner = owner;
-    }
-    
-    
 
     public Animal(Integer animalId) {
         this.animalId = animalId;
@@ -117,21 +105,20 @@ public class Animal implements Serializable {
         this.sex = sex;
     }
 
+    public Date getLastVaccinated() {
+        return lastVaccinated;
+    }
+
+    public void setLastVaccinated(Date lastVaccinated) {
+        this.lastVaccinated = lastVaccinated;
+    }
+
     public Boolean getIsActive() {
         return isActive;
     }
 
     public void setIsActive(Boolean isActive) {
         this.isActive = isActive;
-    }
-
-    @XmlTransient
-    public Collection<Medicalhistory> getMedicalhistoryCollection() {
-        return medicalhistoryCollection;
-    }
-
-    public void setMedicalhistoryCollection(Collection<Medicalhistory> medicalhistoryCollection) {
-        this.medicalhistoryCollection = medicalhistoryCollection;
     }
 
     public Species getSpecies() {
