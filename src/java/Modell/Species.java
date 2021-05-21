@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Modell;
 
 import java.io.Serializable;
@@ -51,6 +46,21 @@ public class Species implements Serializable {
 
     public Species() {
     }
+
+    public Species(Integer speciesId, String name, Boolean isActive, Collection<Animal> animalCollection) {
+        this.speciesId = speciesId;
+        this.name = name;
+        this.isActive = isActive;
+        this.animalCollection = animalCollection;
+    }
+
+    public Species(Integer speciesId, String name, Boolean isActive) {
+        this.speciesId = speciesId;
+        this.name = name;
+        this.isActive = isActive;
+    }
+    
+    
 
     public Species(Integer speciesId) {
         this.speciesId = speciesId;

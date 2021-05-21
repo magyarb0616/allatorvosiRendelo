@@ -8,7 +8,7 @@ import javax.persistence.Persistence;
  */
 public class dbCon {
     
-    public EntityManager getdbCon(){
+    public static EntityManager getdbCon(){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("AllatorvosRendeloPU");
         EntityManager em = emf.createEntityManager();
         return em;
