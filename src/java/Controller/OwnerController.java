@@ -129,7 +129,9 @@ public class OwnerController extends HttpServlet {
           if(request.getParameter("task").equals("list")){
                 JSONObject returnValue = new JSONObject();
                 try{
-                    returnValue.put("result", OwnerService.OwnerList());
+                    if(!OwnerService.OwnerList().isEmpty()){
+                        returnValue.put("result", OwnerService.OwnerList());
+                    }else{returnValue.put("result", "Nincs megjeleníthető elem!");} 
                 }catch(Exception ex){
                     System.out.println("Controller - Error -> "+ex.getMessage());
                 }

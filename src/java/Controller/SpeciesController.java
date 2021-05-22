@@ -87,7 +87,9 @@ public class SpeciesController extends HttpServlet {
             if(request.getParameter("task").equals("list")){
                 JSONObject returnValue = new JSONObject();
                 try{
-                    returnValue.put("result", SpeciesService.listSpecies());
+                    if(!SpeciesService.listSpecies().isEmpty()){
+                        returnValue.put("result", SpeciesService.listSpecies());
+                    }else{returnValue.put("result", "Nincs megjeleníthető elem!");}                    
                 }catch(Exception ex){
                     System.out.println("Controller - Error -> "+ex.getMessage());
                 }
@@ -99,7 +101,8 @@ public class SpeciesController extends HttpServlet {
                 JSONObject returnValue = new JSONObject();
                 try{
                     JSONObject speciesCount = SpeciesService.SpeciesCount();
-                    returnValue.put("result", speciesCount);
+                        System.out.println(speciesCount);
+                      returnValue.put("result", speciesCount);     
                 }catch(Exception ex){
                     System.out.println("Controller - Error -> "+ex.getMessage());
                 }

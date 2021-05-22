@@ -126,7 +126,9 @@ public class AnimalController extends HttpServlet {
              if(request.getParameter("task").equals("list")){
                 JSONObject returnValue = new JSONObject();
                 try{
-                    returnValue.put("result", AnimalService.AnimalList());
+                    if(AnimalService.AnimalList().isEmpty()){
+                       returnValue.put("result", "Nincs megjeleníthető elem!"); 
+                    }else{returnValue.put("result", AnimalService.AnimalList());}                    
                 }catch(Exception ex){
                     System.out.println("Controller - Error -> "+ex.getMessage());
                 }
@@ -153,6 +155,16 @@ public class AnimalController extends HttpServlet {
             System.out.println("Controller - Error -> "+ex.getMessage());
         }
     }
+    
+//     if(request.getParameter("task").equals("list")){
+//                JSONObject returnValue = new JSONObject();
+//                try{
+//                    returnValue.put("result", AnimalService.AnimalList());
+//                }catch(Exception ex){
+//                    System.out.println("Controller - Error -> "+ex.getMessage());
+//                }
+//                out.print(returnValue.toString());  
+//            }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
