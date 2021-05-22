@@ -69,11 +69,44 @@ public class Animal implements Serializable {
     public Animal() {
     }
 
+    public Animal(Integer animalId, String name, Date birthdate, Boolean sex, Date lastVaccinated, Boolean isActive, Species species, Owner owner) {
+        this.animalId = animalId;
+        this.name = name;
+        this.birthdate = birthdate;
+        this.sex = sex;
+        this.lastVaccinated = lastVaccinated;
+        this.isActive = isActive;
+        this.species = species;
+        this.owner = owner;
+    }
+
+    public Animal(Integer animalId, String name, Date birthdate, Boolean sex, Date lastVaccinated, Boolean isActive) {
+        this.animalId = animalId;
+        this.name = name;
+        this.birthdate = birthdate;
+        this.sex = sex;
+        this.lastVaccinated = lastVaccinated;
+        this.isActive = isActive;
+    }
+    
     public Animal(Integer animalId, String name, Date birthdate, Boolean sex) {
         this.animalId = animalId;
         this.name = name;
         this.birthdate = birthdate;
         this.sex = sex;
+    }
+
+    public Animal(Integer animalId, String name, Date birthdate, Boolean sex, Date lastVaccinated) {
+        this.animalId = animalId;
+        this.name = name;
+        this.birthdate = birthdate;
+        this.sex = sex;
+        this.lastVaccinated = lastVaccinated;
+    }
+
+    public Animal(Integer animalId, Boolean isActive) {
+        this.animalId = animalId;
+        this.isActive = isActive;
     }
     
     

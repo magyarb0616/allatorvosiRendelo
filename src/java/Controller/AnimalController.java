@@ -24,6 +24,7 @@ public class AnimalController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
+            //add
             if(request.getParameter("task").equals("add")){
                 JSONObject returnValue = new JSONObject();
                 try{
@@ -57,7 +58,83 @@ public class AnimalController extends HttpServlet {
                 }    
             }
             
+            //update
+             if(request.getParameter("task").equals("update")){
+                JSONObject returnValue = new JSONObject();
+                try{
+                    if(!request.getParameter("id").isEmpty()
+                       && !request.getParameter("name").isEmpty()
+                       && !request.getParameter("birthdate").isEmpty()
+                       && !request.getParameter("sex").isEmpty()
+                       && !request.getParameter("lastVac").isEmpty()
+                       && !request.getParameter("species").isEmpty()
+                       && !request.getParameter("owner").isEmpty()
+                       && (request.getParameter("sex").equals("true") || request.getParameter("sex").equals("false"))){
+                        
+                        Integer id = Integer.parseInt(request.getParameter("id"));
+                        String name = request.getParameter("name");
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        Date date = sdf.parse(request.getParameter("birthdate"));
+                        Boolean sex = null;
+                        if(request.getParameter("sex").equals("true")) {
+                                  sex = true;                 
+                              } else {sex = false;}
+                        Date lastVac = sdf.parse(request.getParameter("lastVac"));
+                        Integer species = Integer.parseInt(request.getParameter("species"));
+                        Integer owner = Integer.parseInt(request.getParameter("owner"));
+                        
+                        Animal a = new Animal(id,name,date,sex, lastVac);
+                        String result = AnimalService.AnimalEdit(a, owner, species);
+                        returnValue.put("result", result);      
+                }else{
+                      returnValue.put("result", "A mezők nincsenek megfelelően kitöltve!");   
+                    }
+                    out.print(returnValue.toString());  
+                    
+                }catch(Exception ex){
+                    System.out.println("Controller - Error->"+ex.getMessage());
+                }    
+            }
             
+             //set Active
+             if(request.getParameter("task").equals("setActive")){
+                JSONObject returnValue = new JSONObject();
+                try{
+                    if(!request.getParameter("id").isEmpty()
+                       && !request.getParameter("isActive").isEmpty()
+                       && (request.getParameter("isActive").equals("true") || request.getParameter("isActive").equals("false"))){
+                        
+                       Integer id = Integer.parseInt(request.getParameter("id"));
+                    Boolean isActive = null;
+                    if(request.getParameter("isActive").equals("true")) {
+                            isActive = true;                 
+                        } else {isActive = false;}
+                    
+                    Animal a = new Animal(id,isActive);
+                    String result = AnimalService.AnimalSetActive(a);
+                    returnValue.put("result", result);   
+                    }else{
+                        returnValue.put("result", "A mezők nincsenek megfelelően kitöltve!");
+                    }
+                    out.print(returnValue.toString());     
+                }catch(Exception ex){
+                    System.out.println("Controller - Error->"+ex.getMessage());
+                }    
+             }
+             
+             //List
+             if(request.getParameter("task").equals("list")){
+                JSONObject returnValue = new JSONObject();
+                try{
+                    returnValue.put("result", AnimalService.AnimalList());
+                }catch(Exception ex){
+                    System.out.println("Controller - Error -> "+ex.getMessage());
+                }
+                out.print(returnValue.toString());  
+            }
+            
+        }catch(Exception ex){
+            System.out.println("Controller - Error -> "+ex.getMessage());
         }
     }
 
