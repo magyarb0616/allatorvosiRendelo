@@ -38,7 +38,6 @@ public class SpeciesService {
     }
     
     public static List<Species> listSpecies(){
-        System.out.println("Service -> done");
         return SpeciesRepo.listSpecies();
     }
     

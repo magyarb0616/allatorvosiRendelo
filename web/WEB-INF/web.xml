@@ -8,6 +8,14 @@
         <servlet-name>SpeciesController</servlet-name>
         <servlet-class>Controller.SpeciesController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>OwnerController</servlet-name>
+        <servlet-class>Controller.OwnerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AnimalController</servlet-name>
+        <servlet-class>Controller.AnimalController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NewServlet</servlet-name>
         <url-pattern>/NewServlet</url-pattern>
@@ -15,6 +23,14 @@
     <servlet-mapping>
         <servlet-name>SpeciesController</servlet-name>
         <url-pattern>/SpeciesController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OwnerController</servlet-name>
+        <url-pattern>/OwnerController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AnimalController</servlet-name>
+        <url-pattern>/AnimalController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

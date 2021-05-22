@@ -20,7 +20,7 @@ public class SpeciesController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
        
         try (PrintWriter out = response.getWriter()) {
-       
+            //Add
             if(request.getParameter("task").equals("add")){
                 JSONObject returnValue = new JSONObject();
                 
@@ -36,6 +36,7 @@ public class SpeciesController extends HttpServlet {
                 out.print(returnValue.toString());
             }
             
+            //Update
             if(request.getParameter("task").equals("update")){
                 JSONObject returnValue = new JSONObject();
                 try{
@@ -56,18 +57,19 @@ public class SpeciesController extends HttpServlet {
                 
             }
             
+            //set Active
             if(request.getParameter("task").equals("setActive")){
                 JSONObject returnValue = new JSONObject();
                 try{
-                    if(!request.getParameter("id").isEmpty() && !request.getParameter("isActive").isEmpty()){
+                    if(!request.getParameter("id").isEmpty() && !request.getParameter("isActive").isEmpty() 
+                            && ( request.getParameter("isActive").equals("false") || request.getParameter("isActive").equals("true")))
+                    {                        
                         Integer id = Integer.parseInt(request.getParameter("id"));
                         Boolean isActive = null;
-                        //note: tovabbi ellenorzes jo lenne!!!
+                        
                         if(request.getParameter("isActive").equals("true")) {
                             isActive = true;                 
-                        } else {
-                            isActive = false;
-                        }
+                        } else {isActive = false;}                        
                         Species s = new Species(id,"idc",isActive);
                         String result = SpeciesService.SpeciesSetActive(s);
                         returnValue.put("result", result);
@@ -81,7 +83,7 @@ public class SpeciesController extends HttpServlet {
                 
             }
                        
-            
+            //List
             if(request.getParameter("task").equals("list")){
                 JSONObject returnValue = new JSONObject();
                 try{

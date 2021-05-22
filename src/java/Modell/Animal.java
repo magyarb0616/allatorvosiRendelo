@@ -69,6 +69,14 @@ public class Animal implements Serializable {
     public Animal() {
     }
 
+    public Animal(Integer animalId, String name, Date birthdate, Boolean sex) {
+        this.animalId = animalId;
+        this.name = name;
+        this.birthdate = birthdate;
+        this.sex = sex;
+    }
+    
+    
     public Animal(Integer animalId) {
         this.animalId = animalId;
     }

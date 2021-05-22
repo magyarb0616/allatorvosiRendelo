@@ -75,6 +75,35 @@ public class Owner implements Serializable {
     public Owner() {
     }
 
+    public Owner(Integer ownerId, String name, Date birthdate, String phone, String city, String address, Boolean sex, Boolean isActive) {
+        this.ownerId = ownerId;
+        this.name = name;
+        this.birthdate = birthdate;
+        this.phone = phone;
+        this.city = city;
+        this.address = address;
+        this.sex = sex;
+        this.isActive = isActive;
+    }
+
+    public Owner(Integer id, String name, Date birthdate, String phone, String city, String address, Boolean sex) {
+        this.ownerId = id;
+        this.name = name;
+        this.birthdate = birthdate;
+        this.phone = phone;
+        this.city = city;
+        this.address = address;
+        this.sex = sex;
+    }
+
+    public Owner(Integer ownerId, Boolean isActive) {
+        this.ownerId = ownerId;
+        this.isActive = isActive;
+    }
+    
+    
+
+    
     public Owner(Integer ownerId) {
         this.ownerId = ownerId;
     }
