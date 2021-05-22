@@ -132,6 +132,22 @@ public class AnimalController extends HttpServlet {
                 }
                 out.print(returnValue.toString());  
             }
+             
+            //vaccinate
+            if(request.getParameter("task").equals("vaccinate")){
+                JSONObject returnValue = new JSONObject();
+                try{
+                    if(!request.getParameter("id").isEmpty()){
+                        Integer id = Integer.parseInt(request.getParameter("id"));
+                        String result = AnimalService.AnimalVacciante(id);
+                        returnValue.put("result", result);
+                    }
+                }catch(Exception ex){
+                    returnValue.put("result", "A mezők nincsenek megfelelően kitöltve!");
+                    System.out.println("Controller - Error -> "+ex.getMessage());
+                }
+                out.print(returnValue.toString());
+            }
             
         }catch(Exception ex){
             System.out.println("Controller - Error -> "+ex.getMessage());

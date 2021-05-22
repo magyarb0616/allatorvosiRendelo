@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * @author bence
@@ -103,9 +105,32 @@ public class SpeciesRepo {
         } catch (Exception ex){
             System.out.println("Repo - Error-> "+ex);
             return null;
+        }    
+    }
+    
+    public static JSONObject SpeciesCount(){
+        try{
+           EntityManager em = dbCon.getdbCon(); 
+           StoredProcedureQuery spq = em.createStoredProcedureQuery("speciesCount");
+           
+           List<Object[]> SpeciesCountObjectList = spq.getResultList();
+           JSONObject speciesCount= new JSONObject();
+           JSONArray nameArray = new JSONArray();
+           JSONArray countArray = new JSONArray();
+           for (Object[] obj : SpeciesCountObjectList){
+               String name = obj[0].toString();
+               Integer count = Integer.parseInt(obj[1].toString());
+               nameArray.put(name);
+               countArray.put(count);
+           }
+           speciesCount.put("name", nameArray);
+           speciesCount.put("count", countArray);
+           em.close();
+           return speciesCount;      
+        }catch (Exception ex){
+            System.out.println("Repo - Error-> "+ex);
+            return null;
         }
-        
-        
     }
     
     

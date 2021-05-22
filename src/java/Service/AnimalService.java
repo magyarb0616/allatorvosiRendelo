@@ -47,4 +47,12 @@ public class AnimalService {
         return AnimalRepo.AnimalList();
     }
     
+    public static String AnimalVacciante(Integer id){
+        if(id>0){
+            if(AnimalRepo.AnimalVaccinate(id)){
+                return "Az oltás sikeresen rögzítésre került!";
+            }else{return "A validáció sikeres, de az oltást nem sikerült rögzíteni!";}
+        }else{return "Az id nem megfelelő!";}
+    }
+    
 }

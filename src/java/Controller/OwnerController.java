@@ -136,9 +136,34 @@ public class OwnerController extends HttpServlet {
                 out.print(returnValue.toString());  
             }
     
+          //owner animals
+          if(request.getParameter("task").equals("ownerAnimals")){
+                JSONObject returnValue = new JSONObject();
+                try{
+                    if(!request.getParameter("id").isEmpty()){
+                        Integer id = Integer.parseInt(request.getParameter("id"));
+                        Owner o = new Owner(id);
+                        returnValue.put("result", OwnerService.OwnerAnimals(o));                       
+                    }else{
+                        returnValue.put("result", "A mezők nem megfelelően vannak kitöltve!");
+                    }
+          
+                }catch(Exception ex){
+                    System.out.println("Controller - Error -> "+ex.getMessage());
+                }
+                out.print(returnValue.toString());  
+            }
+          
+          
+          
+          
         }catch(Exception ex){
             System.out.println("Controller - Error -> "+ex.getMessage());
         }
+        
+        
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

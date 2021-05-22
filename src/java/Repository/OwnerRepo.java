@@ -1,5 +1,6 @@
 package Repository;
 
+import Modell.Animal;
 import Modell.Owner;
 import Modell.dbCon;
 import java.text.SimpleDateFormat;
@@ -134,6 +135,49 @@ public class OwnerRepo {
             
         }catch (Exception ex){
             System.out.println("Repo - Error-> "+ex);
+            return null;
+        }
+    }
+    
+    public static List<Animal> OwnerAnimals(Owner o){
+        try{
+            EntityManager em = dbCon.getdbCon();
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("ownerAnimalList");
+            
+            spq.registerStoredProcedureParameter("id_IN", Integer.class, ParameterMode.IN);
+            spq.setParameter("id_IN", o.getOwnerId());
+            
+            List<Object[]> AnimalObjectList = spq.getResultList();
+            List<Animal> AnimalList = new ArrayList<>();
+            
+            for (Object[] AnimalObject : AnimalObjectList){
+                Integer id = Integer.parseInt(AnimalObject[0].toString());
+                String name = AnimalObject[1].toString();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Date birthdate = sdf.parse(AnimalObject[2].toString()); 
+                Boolean sex = null;
+                if(AnimalObject[3].toString().equals("true")){
+                        sex = true;
+                    }else{
+                        sex = false;
+                    }
+                Date lastVac = sdf.parse(AnimalObject[4].toString());
+                Boolean isActive = null;
+                if(AnimalObject[5].toString().equals("true")){
+                        isActive = true;
+                    }else{
+                        isActive = false;
+                    }
+    //            Integer species = Integer.parseInt(AnimalObject[6].toString());
+    //            Integer owner = Integer.parseInt(AnimalObject[7].toString());
+                Animal entity = new Animal(id,name,birthdate,sex,lastVac,isActive);
+                AnimalList.add(entity);           
+            }
+            em.close();
+            return AnimalList;
+            
+        }catch(Exception ex){
+            System.out.println("Repo - Error->"+ex.getMessage());
             return null;
         }
     }

@@ -1,5 +1,6 @@
 package Service;
 
+import Modell.Animal;
 import Modell.Owner;
 import Repository.OwnerRepo;
 import java.text.SimpleDateFormat;
@@ -51,6 +52,10 @@ public class OwnerService {
     
     public static List<Owner> OwnerList(){
         return OwnerRepo.OwnerList();
+    }
+    
+    public static List<Animal> OwnerAnimals(Owner o){
+        return OwnerRepo.OwnerAnimals(o);
     }
     
     

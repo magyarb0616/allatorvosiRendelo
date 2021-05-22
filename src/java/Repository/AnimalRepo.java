@@ -137,6 +137,22 @@ public class AnimalRepo {
 
     }
     
+    public static Boolean AnimalVaccinate(Integer id){
+        try{
+            EntityManager em = dbCon.getdbCon();
+            StoredProcedureQuery spq = em.createStoredProcedureQuery("animalVaccinate");
+            
+            spq.registerStoredProcedureParameter("id_IN", Integer.class, ParameterMode.IN);
+            spq.setParameter("id_IN", id);
+            
+            spq.execute();
+            return true;
+        }catch(Exception ex){
+            System.out.println("Repo - Error->"+ex.getMessage());
+            return false;
+        }
+        
+    }
     
     
     

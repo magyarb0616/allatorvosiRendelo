@@ -94,6 +94,18 @@ public class SpeciesController extends HttpServlet {
                 out.print(returnValue.toString());  
             }
             
+            //SpeciesCount
+            if(request.getParameter("task").equals("speciesCount")){
+                JSONObject returnValue = new JSONObject();
+                try{
+                    JSONObject speciesCount = SpeciesService.SpeciesCount();
+                    returnValue.put("result", speciesCount);
+                }catch(Exception ex){
+                    System.out.println("Controller - Error -> "+ex.getMessage());
+                }
+                out.print(returnValue.toString());  
+            }
+            
             
             
         }catch(Exception ex){

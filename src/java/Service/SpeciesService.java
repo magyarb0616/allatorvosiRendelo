@@ -3,6 +3,7 @@ package Service;
 import Modell.Species;
 import Repository.SpeciesRepo;
 import java.util.List;
+import org.json.JSONObject;
 
 /**
  * @author bence
@@ -39,6 +40,10 @@ public class SpeciesService {
     
     public static List<Species> listSpecies(){
         return SpeciesRepo.listSpecies();
+    }
+    
+    public static JSONObject SpeciesCount(){
+        return SpeciesRepo.SpeciesCount();
     }
     
     
