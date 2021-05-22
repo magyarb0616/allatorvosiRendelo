@@ -140,7 +140,7 @@ public class OwnerController extends HttpServlet {
           if(request.getParameter("task").equals("ownerAnimals")){
                 JSONObject returnValue = new JSONObject();
                 try{
-                    if(!request.getParameter("id").isEmpty()){
+                    if(!request.getParameter("id").isEmpty() && Integer.parseInt(request.getParameter("id"))>0){
                         Integer id = Integer.parseInt(request.getParameter("id"));
                         Owner o = new Owner(id);
                         returnValue.put("result", OwnerService.OwnerAnimals(o));                       
